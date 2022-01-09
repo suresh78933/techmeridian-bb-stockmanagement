@@ -3,16 +3,18 @@ package com.techmeridian.stockmanagement.session;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.util.StringUtils;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import com.techmeridian.stockmanagement.user.User;
 
 public final class SessionUtils {
 
 	public void isSessionValid(String sessionId) throws Exception {
-		if (StringUtils.isEmpty(sessionId)) {
+		String sCurrentSessionId=RequestContextHolder.currentRequestAttributes().getSessionId();
+		if (StringUtils.isEmpty(sCurrentSessionId)) {
 			throw new Exception("Your identity please !!");
 		}
-		if (!StockSessionListener.contains(sessionId)) {
+		if (!StockSessionListener.contains(sCurrentSessionId)) {
 			throw new Exception("Am not sure who you are, get your identity and ping me back !!");
 		}
 	}

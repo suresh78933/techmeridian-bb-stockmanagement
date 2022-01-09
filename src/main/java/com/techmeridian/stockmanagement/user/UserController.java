@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techmeridian.stockmanagement.session.SessionUtils;
+import com.techmeridian.stockmanagement.session.StockSessionListener;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -50,10 +51,11 @@ public class UserController {
 		if (authUser != null) {
 			HttpSession httpSession = request.getSession();
 			httpSession.setAttribute("user", authUser);
+			logger.info(httpSession.getId());
 			response.setHeader("id", httpSession.getId());
 
 			// TODO: this is just for testing
-			// StockSessionListener.addSession(httpSession);
+			StockSessionListener.addSession(httpSession);
 		}
 
 		logger.debug("returning " + authUser);

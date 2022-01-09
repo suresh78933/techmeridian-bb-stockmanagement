@@ -21,10 +21,11 @@ public class StockSessionListener implements HttpSessionListener {
 		SESSIONS.remove(httpSession.getId());
 	}
 
-	/*
-	 * public static void addSession(HttpSession httpSession){
-	 * SESSIONS.put(httpSession.getId(), httpSession); }
-	 */
+	
+	  public static void addSession(HttpSession httpSession){
+	  SESSIONS.put(httpSession.getId(), httpSession); 
+	  }
+	 
 
 	private static Map<String, HttpSession> SESSIONS = new HashMap<String, HttpSession>();
 
